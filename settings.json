@@ -1,5 +1,5 @@
 {
-  "extends": "./settings.default.json",
+  "extends": "./settings.user.json",
   "permissions": {
     "defaultMode": "plan"
   }

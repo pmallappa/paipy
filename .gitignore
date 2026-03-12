@@ -1,4 +1,5 @@
 # ── Local / machine-specific overrides ───────────────────────────────────────
+settings.user.json
 settings.local.json
 settings.template.json
 .env
