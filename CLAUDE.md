@@ -19,17 +19,17 @@ Your first output MUST be the mode header. No freeform output. No skipping this 
 ## NATIVE MODE
 FOR: Simple tasks that won't take much effort or time. More advanced tasks use ALGORITHM MODE below.
 
-**Voice:** `curl -s -X POST http://localhost:8888/notify -H "Content-Type: application/json" -d '{"message": "Executing using PAI native mode", "voice_id": "fTtv3eikoepIosk8dTZ5", "voice_enabled": true}'`
+**Notify:** `$HOME/.claude/banner-server/notify.sh '{"message": "Executing using PAI native mode", "type": "native"}'`
 
 ```
 ════ PAI | NATIVE MODE ═══════════════════════
-🗒️ TASK: [8 word description]
+✎ TASK: [8 word description]
 [work]
-🔄 ITERATION on: [16 words of context if this is a follow-up]
-📃 CONTENT: [Up to 128 lines of the content, if there is any]
-🔧 CHANGE: [8-word bullets on what changed]
-✅ VERIFY: [8-word bullets on how we know what happened]
-🗣️ Assistant: [8-16 word summary]
+↺ ITERATION on: [16 words of context if this is a follow-up]
+☰ CONTENT: [Up to 128 lines of the content, if there is any]
+⚙ CHANGE: [8-word bullets on what changed]
+☑ VERIFY: [8-word bullets on how we know what happened]
+▶ Assistant: [8-16 word summary]
 ```
 On follow-ups, include the ITERATION line. On first response to a new request, omit it.
 
@@ -41,12 +41,12 @@ FOR: Multi-step, complex, or difficult work. Troubleshooting, debugging, buildin
 ## MINIMAL — pure acknowledgments, ratings
 ```
 ═══ PAI ═══════════════════════════
-🔄 ITERATION on: [16 words of context if this is a follow-up]
-📃 CONTENT: [Up to 24 lines of the content, if there is any]
-🔧 CHANGE: [8-word bullets on what changed]
-✅ VERIFY: [8-word bullets on how we know what happened]
-📋 SUMMARY: [4 CreateStoryExplanation bullets of 8 words each]
-🗣️ Assistant: [summary in 8-16 word summary]
+↺ ITERATION on: [16 words of context if this is a follow-up]
+☰ CONTENT: [Up to 24 lines of the content, if there is any]
+⚙ CHANGE: [8-word bullets on what changed]
+☑ VERIFY: [8-word bullets on how we know what happened]
+≡ SUMMARY: [4 CreateStoryExplanation bullets of 8 words each]
+▶ Assistant: [summary in 8-16 word summary]
 ```
 
 ---
@@ -94,12 +94,14 @@ This repo lives at `~/.config/claude/` (symlinked as `~/.claude/`) and is the PA
 
 ### Key Architectural Concepts
 
-**The Algorithm** (`pai/algorithm/v3.5.0.md`) — The universal problem-solving loop: Current State → Ideal State via ISC (Ideal State Criteria). Must be loaded and followed for all ALGORITHM MODE responses.
+**The Algorithm** (`pai/algorithm/v3.5.0.md`) — The universal problem-solving loop: Current State → Ideal State via ISC (Ideal State Criteria). Must be loaded and followed for all ALGORITHM MODE responses. Current version is in `pai/algorithm/LATEST`; always reference the file that version points to.
+
+**paipy** (`paipy/`) — Shared Python library for all hooks. Import with `from paipy import ...`. Key classes: `Settings`, `Paths`, `HookIO`, `Clock`, `PRD`, `Learning`. Flat legacy API (`pai_dir()`, `memory()`, `read_stdin()`) still supported. Set `PYTHONPATH=${PAI_DIR}` (done automatically via `settings.json`) to import from anywhere.
 
 **Skills** (`skills/`) — Self-activating capability modules. Each skill has:
 - `SKILL.md` with YAML frontmatter (name, description with `USE WHEN` trigger)
 - `Workflows/` directory with TitleCase `.md` files
-- Optional `Tools/` directory with TypeScript CLI tools
+- Optional `Tools/` directory with TypeScript CLI tools (run with Bun)
 
 **Hooks** (`hooks/py/`) — Python scripts registered in `settings.json` that fire on lifecycle events:
 - `SessionStart`: `load_context.py`, `stubs.py`
@@ -108,10 +110,37 @@ This repo lives at `~/.config/claude/` (symlinked as `~/.claude/`) and is the PA
 - `PostToolUse`: `prd_sync.py` (Write/Edit — syncs PRD frontmatter to work.json)
 - `Stop`: `last_response_cache.py`, `stubs.py`
 - `SessionEnd`: `work_completion_learning.py`, `session_cleanup.py`, `relationship_memory.py`, `update_counts.py`, `stubs.py`
+- Shared handler utilities live in `hooks/py/handlers/`
 
 **Memory System** (`memory/`) — Structured directories: `RAW/` (JSONL event logs), `WORK/` (active work items + PRDs), `LEARNING/` (system + algorithm learnings, ratings), `STATE/` (current-work.json, progress), `RESEARCH/`, `SECURITY/`.
 
-**PRD System** — During ALGORITHM MODE, a PRD.md file is created at `memory/work/{slug}/PRD.md`. The AI writes all PRD content directly (YAML frontmatter + ISC criteria). The `prd_sync.py` hook reads it and syncs to `work.json` (read-only from PRD; hooks never write to it).
+**PRD System** — During ALGORITHM MODE, a PRD.md file is created at `memory/work/{slug}/PRD.md`. The AI writes all PRD content directly (YAML frontmatter + ISC criteria). The `prd_sync.py` hook reads it and syncs to `work.json` (read-only from PRD; hooks never write to it). PRD slug format: `YYYYMMDD-HHMMSS_kebab-description`.
+
+**Banner/Notification Server** (`banner-server/`) — Local notification server. Trigger via `banner-server/notify.sh '{"message": "...", "type": "native"}'`. Used by hooks and mode headers to surface in-session status.
+
+### Development Workflow
+
+```bash
+# Run a hook manually (pipe empty JSON for SessionStart-style hooks)
+echo '{}' | python hooks/py/load_context.py
+
+# Run a skill TypeScript tool (Bun required)
+bun run skills/Research/Tools/Search.ts
+
+# Check paipy is importable (PYTHONPATH must include PAI_DIR)
+PYTHONPATH=. python -c "from paipy import Paths; print(Paths().pai_dir)"
+
+# Validate settings.json is well-formed
+python -c "import json; json.load(open('settings.json'))"
+
+# Check current algorithm version
+cat pai/algorithm/LATEST
+
+# Trigger a banner notification manually
+bash banner-server/notify.sh '{"message": "test", "type": "native"}'
+```
+
+When writing new hooks: use `paipy.HookIO` for stdin/stdout, `paipy.Paths` for directory resolution. Hooks must never block — fail silently and exit 0 unless blocking is intentional (PreToolUse can exit non-zero to block).
 
 ### pai-install Architecture
 

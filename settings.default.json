@@ -1,0 +1,201 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+
+  "env": {
+    "PAI_DIR": "/home/pmallapp/.claude",
+    "PYTHONPATH": "/home/pmallapp/.claude:/home/pmallapp/.claude/hooks/py",
+    "CLAUDE_CODE_MAX_OUTPUT_TOKENS": "80000",
+    "BASH_DEFAULT_TIMEOUT_MS": "600000",
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
+
+  "permissions": {
+    "allow": [
+      "Bash",
+      "Read",
+      "Write",
+      "Edit",
+      "MultiEdit",
+      "Glob",
+      "Grep",
+      "LS",
+      "WebFetch",
+      "WebSearch",
+      "NotebookRead",
+      "NotebookEdit",
+      "TodoWrite",
+      "ExitPlanMode",
+      "Task",
+      "Skill",
+      "mcp__*"
+    ],
+    "deny": [
+      "Bash(rm -rf *)",
+      "Bash(rm -fr *)",
+      "Bash(sudo *)",
+      "Bash(mkfs *)",
+      "Bash(dd *)",
+      "Bash(wget *|bash*)",
+      "Bash(wget *| bash*)",
+      "Bash(git push --force*)",
+      "Bash(git push *--force*)",
+      "Bash(git reset --hard*)",
+      "Edit(~/.bashrc)",
+      "Edit(~/.zshrc)",
+      "Edit(~/.ssh/**)",
+      "Read(~/.ssh/**)",
+      "Read(~/.gnupg/**)",
+      "Read(~/.aws/**)",
+      "Read(~/.azure/**)",
+      "Read(~/.config/gh/**)",
+      "Read(~/.git-credentials)",
+      "Read(~/.docker/config.json)",
+      "Read(~/.kube/**)",
+      "Read(~/.npmrc)",
+      "Read(~/.npm/**)",
+      "Read(~/.pypirc)",
+      "Read(~/.gem/credentials)",
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./secrets/**)",
+      "Read(./.aws/**)",
+      "Read(./config/credentials.json)",
+      "Read(./appsettings.*.json)"
+    ],
+    "ask": [
+      "Bash(rm -rf ~)",
+      "Bash(rm -rf ~/.claude)",
+      "Bash(git push:*)",
+      "Bash(git push -f:*)",
+      "Bash(npm publish:*)",
+      "Bash(docker:*)",
+      "Bash(kubectl:*)",
+      "Read(~/.aws/credentials)",
+      "Write(~/.claude/settings.json)",
+      "Edit(~/.claude/settings.json)"
+    ],
+    "defaultMode": "default"
+  },
+
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [],
+
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          { "type": "command", "command": "${PAI_DIR}/hooks/py/load_context.py" },
+          { "type": "command", "command": "${PAI_DIR}/hooks/py/stubs.py" }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          { "type": "command", "command": "${PAI_DIR}/hooks/py/rating_capture.py" },
+          { "type": "command", "command": "${PAI_DIR}/hooks/py/session_auto_name.py" },
+          { "type": "command", "command": "${PAI_DIR}/hooks/py/stubs.py" }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [{ "type": "command", "command": "${PAI_DIR}/hooks/py/security_validator.py" }]
+      },
+      {
+        "matcher": "Edit",
+        "hooks": [{ "type": "command", "command": "${PAI_DIR}/hooks/py/security_validator.py" }]
+      },
+      {
+        "matcher": "Write",
+        "hooks": [{ "type": "command", "command": "${PAI_DIR}/hooks/py/security_validator.py" }]
+      },
+      {
+        "matcher": "Read",
+        "hooks": [{ "type": "command", "command": "${PAI_DIR}/hooks/py/security_validator.py" }]
+      },
+      {
+        "matcher": "Task",
+        "hooks": [{ "type": "command", "command": "${PAI_DIR}/hooks/py/agent_execution_guard.py" }]
+      },
+      {
+        "matcher": "Skill",
+        "hooks": [{ "type": "command", "command": "${PAI_DIR}/hooks/py/skill_guard.py" }]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write",
+        "hooks": [{ "type": "command", "command": "${PAI_DIR}/hooks/py/prd_sync.py" }]
+      },
+      {
+        "matcher": "Edit",
+        "hooks": [{ "type": "command", "command": "${PAI_DIR}/hooks/py/prd_sync.py" }]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          { "type": "command", "command": "${PAI_DIR}/hooks/py/last_response_cache.py" },
+          { "type": "command", "command": "${PAI_DIR}/hooks/py/stubs.py" }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          { "type": "command", "command": "${PAI_DIR}/hooks/py/work_completion_learning.py" },
+          { "type": "command", "command": "${PAI_DIR}/hooks/py/session_cleanup.py" },
+          { "type": "command", "command": "${PAI_DIR}/hooks/py/relationship_memory.py" },
+          { "type": "command", "command": "${PAI_DIR}/hooks/py/update_counts.py" },
+          { "type": "command", "command": "${PAI_DIR}/hooks/py/stubs.py" }
+        ]
+      }
+    ]
+  },
+
+  "mcpServers": {
+    "cloudflare": {
+      "url": "https://mcp.cloudflare.com/mcp"
+    }
+  },
+
+  "autoUpdates": false,
+  "installMethod": "native",
+  "skipWelcome": true,
+  "skipApiKeyConfirmation": true,
+  "acceptedTerms": true,
+  "hasCompletedOnboarding": true,
+
+  "customApiKeyResponses": {
+    "approved": ["dummy", "sk-local"],
+    "rejected": []
+  },
+
+  "primaryApiKey": "dummy",
+  "customWelcomeMessage": "Welcome to Claude Code - AMD Edition",
+
+  "enabledPlugins": {
+    "rust-analyzer-lsp@claude-plugins-official": true
+  },
+
+  "companyAnnouncements": [
+    "Welcome to Claude Code - AMD Edition!",
+    "Review AMD coding standards before committing code",
+    "Security reminder: Never commit credentials, API keys, or sensitive data",
+    "Tip: Use /help to see available commands and features"
+  ],
+
+  "showSpinnerTree": false,
+  "opusProMigrationComplete": true,
+  "sonnet1m45MigrationComplete": true,
+
+  "counts": {
+    "skills": 650,
+    "hooks": 56,
+    "workflows": 650,
+    "signals": 1,
+    "updatedAt": "2026-03-11T19:52:13Z"
+  }
+}

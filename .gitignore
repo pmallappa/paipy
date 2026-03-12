@@ -1,6 +1,8 @@
 settings.local.json
+settings.template.json
 __pycache__
 **/*.pyc
 
 **/*.bak
 **/*.orig
+**/backups
