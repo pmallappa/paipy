@@ -1,8 +1,8 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "env": {
-    "PAI_DIR": "/home/pmallapp/tmp/sandbox-test/.claude",
-    "PYTHONPATH": "/home/pmallapp/tmp/sandbox-test/.claude:/home/pmallapp/tmp/sandbox-test/.claude/hooks/py",
+    "PAI_DIR": "/home/pmallapp/.claude",
+    "PYTHONPATH": "/home/pmallapp/.claude:/home/pmallapp/.claude/hooks/py",
     "CLAUDE_CODE_MAX_OUTPUT_TOKENS": "80000",
     "BASH_DEFAULT_TIMEOUT_MS": "600000",
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
