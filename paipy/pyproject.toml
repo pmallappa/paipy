@@ -1,0 +1,11 @@
+[project]
+name = "paipy"
+version = "1.0.0"
+description = "Personal AI Python library — hook infrastructure for Claude Code"
+requires-python = ">=3.12"
+license = "MIT"
+keywords = ["claude-code", "hooks", "personal-ai"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

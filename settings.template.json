@@ -1,0 +1,270 @@
+{
+  "customApiKeyResponses": {
+    "approved": [
+      "dummy",
+      "sk-local"
+    ],
+    "rejected": []
+  },
+  "env": {
+    "ANTHROPIC_API_KEY": "dummy",
+    "ANTHROPIC_BASE_URL": "https://llm-api.amd.com/Anthropic",
+    "ANTHROPIC_CUSTOM_HEADERS": "Ocp-Apim-Subscription-Key: ***REDACTED***",
+    "ANTHROPIC_MODEL": "Claude-Sonnet-4.6",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": "Claude-Opus-4.6",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "Claude-Sonnet-4.6",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "Claude-Haiku-4.5",
+    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
+  },
+  "permissions": {
+    "deny": [
+      "Bash(rm -rf *)",
+      "Bash(rm -fr *)",
+      "Bash(sudo *)",
+      "Bash(mkfs *)",
+      "Bash(dd *)",
+      "Bash(wget *|bash*)",
+      "Bash(wget *| bash*)",
+      "Bash(git push --force*)",
+      "Bash(git push *--force*)",
+      "Bash(git reset --hard*)",
+      "Edit(~/.bashrc)",
+      "Edit(~/.zshrc)",
+      "Edit(~/.ssh/**)",
+      "Read(~/.ssh/**)",
+      "Read(~/.gnupg/**)",
+      "Read(~/.aws/**)",
+      "Read(~/.azure/**)",
+      "Read(~/.config/gh/**)",
+      "Read(~/.git-credentials)",
+      "Read(~/.docker/config.json)",
+      "Read(~/.kube/**)",
+      "Read(~/.npmrc)",
+      "Read(~/.npm/**)",
+      "Read(~/.pypirc)",
+      "Read(~/.gem/credentials)",
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./secrets/**)",
+      "Read(./.aws/**)",
+      "Read(~/.ssh/**)",
+      "Read(./config/credentials.json)",
+      "Read(./appsettings.*.json)"
+    ],
+    "ask": [
+      "Bash(git push:*)",
+      "Bash(npm publish:*)",
+      "Bash(docker:*)",
+      "Bash(kubectl:*)"
+    ]
+  },
+  "model": "sonnet-4-5-20250929[1m]",
+  "enabledPlugins": {
+    "rust-analyzer-lsp@claude-plugins-official": true
+  },
+  "companyAnnouncements": [
+    "Welcome to Claude Code - AMD Edition!",
+    "Review AMD coding standards before committing code",
+    "Security reminder: Never commit credentials, API keys, or sensitive data",
+    "Tip: Use /help to see available commands and features"
+  ],
+  "numStartups": 18,
+  "installMethod": "native",
+  "autoUpdates": false,
+  "hasSeenTasksHint": true,
+  "tipsHistory": {
+    "new-user-warmup": 8,
+    "plan-mode-for-complex-tasks": 7,
+    "terminal-setup": 12,
+    "memory-command": 16,
+    "theme-command": 1,
+    "colorterm-truecolor": 1,
+    "prompt-queue": 7,
+    "enter-to-steer-in-relatime": 2,
+    "todo-list": 2,
+    "install-github-app": 12,
+    "install-slack-app": 12,
+    "drag-and-drop-images": 13,
+    "double-esc-code-restore": 13,
+    "continue": 15,
+    "shift-tab": 15,
+    "image-paste": 5,
+    "desktop-app": 5,
+    "web-app": 5,
+    "mobile-app": 5,
+    "custom-agents": 6,
+    "agent-flag": 6,
+    "feedback-command": 7,
+    "default-permission-mode-config": 17,
+    "permissions": 12,
+    "rename-conversation": 12,
+    "custom-commands": 12,
+    "status-line": 12
+  },
+  "promptQueueUseCount": 104,
+  "cachedGrowthBookFeatures": {
+    "tengu_mcp_tool_search": false,
+    "tengu_event_sampling_config": {},
+    "tengu_log_segment_events": false,
+    "tengu_log_datadog_events": true,
+    "tengu_marble_anvil": true,
+    "tengu_tool_pear": false,
+    "tengu_scarf_coffee": false,
+    "tengu_pid_based_version_locking": true,
+    "tengu_keybinding_customization_release": true,
+    "tengu_slate_nexus": false,
+    "tengu_amber_quartz": false,
+    "tengu_thinkback": false,
+    "tengu_chomp_inflection": false,
+    "tengu_marble_sandcastle": true,
+    "tengu_penguins_off": null,
+    "tengu_streaming_text": false,
+    "tengu-top-of-feed-tip": {
+      "tip": "",
+      "color": ""
+    },
+    "tengu_pr_status_cli": true,
+    "tengu_ccr_bridge": false,
+    "tengu_mcp_elicitation": false,
+    "tengu_post_compact_survey": false,
+    "tengu_claudeai_mcp_connectors": true,
+    "tengu_pebble_leaf_prune": false,
+    "tengu_immediate_model_command": false,
+    "tengu_mulberry_fog": false,
+    "tengu_coral_fern": false,
+    "tengu_scratch": false,
+    "tengu_summarize_tool_results": false,
+    "tengu_bergotte_lantern": false,
+    "tengu_swann_brevity": "focused",
+    "tengu_system_prompt_global_cache": false,
+    "tengu_streaming_tool_execution2": true,
+    "tengu_moth_copse": false,
+    "tengu_cache_plum_violet": false,
+    "tengu_tool_search_unsupported_models": [
+      "haiku"
+    ],
+    "tengu_fgts": false,
+    "tengu_plan_mode_interview_phase": false,
+    "tengu_attribution_header": true,
+    "enhanced_telemetry_beta": false,
+    "tengu_session_memory": false,
+    "tengu_tool_input_aliasing": false,
+    "tengu_coral_whistle": false,
+    "tengu_permission_explainer": true,
+    "tengu_destructive_command_warning": false,
+    "tengu_amber_prism": false,
+    "tengu_1p_event_batch_config": {
+      "scheduledDelayMillis": 10000,
+      "maxExportBatchSize": 400,
+      "maxQueueSize": 8192
+    },
+    "tengu_penguins_enabled": true,
+    "tengu_copper_lantern": false,
+    "tengu_marble_lantern_disabled": false,
+    "tengu_frond_boric": {},
+    "tengu_cicada_nap_ms": 0,
+    "tengu_miraculo_the_bard": false,
+    "tengu_granite_whisper": false,
+    "tengu_quartz_falcon": null,
+    "tengu_turtle_carbon": true,
+    "tengu_desktop_upsell": {
+      "enable_shortcut_tip": false,
+      "enable_startup_dialog": false
+    },
+    "tengu_tangerine_ladder_boost": true,
+    "tengu_glacier_2xr": false,
+    "tengu_swinburne_dune": false,
+    "tengu_sotto_voce": true,
+    "tengu_defer_all_bn4": false,
+    "tengu_tst_hint_m7r": false,
+    "tengu_quiet_hollow": true,
+    "tengu_marble_whisper": false,
+    "tengu_miraculo_the_bard2": false,
+    "tengu_grey_wool": true,
+    "tengu_disable_bypass_permissions_mode": false,
+    "tengu_basalt_3kr": false,
+    "tengu_tight_weave": true,
+    "tengu_auto_background_agents": false,
+    "tengu_plum_vx3": false,
+    "tengu_grey_step2": {
+      "enabled": true,
+      "dialogTitle": "We recommend medium effort for Opus",
+      "dialogDescription": "Effort determines how long Claude thinks for when completing your task. We recommend medium effort for most tasks to balance speed and intelligence and maximize rate limits. Use ultrathink to trigger high effort when needed."
+    },
+    "tengu_sm_compact": false,
+    "tengu_compact_cache_prefix": false,
+    "tengu_lean_cast": false,
+    "tengu_compact_streaming_retry": false,
+    "tengu_disable_streaming_to_non_streaming_fallback": false,
+    "tengu_kairos_cron": false,
+    "tengu_herring_clock": false,
+    "tengu_paper_halyard": false,
+    "tengu_auto_mode_config": {
+      "enabled": "disabled"
+    },
+    "tengu_satin_quoll": {}
+  },
+  "hasCompletedOnboarding": true,
+  "skipWelcome": true,
+  "skipApiKeyConfirmation": true,
+  "acceptedTerms": true,
+  "customWelcomeMessage": "Welcome to Claude Code - AMD Edition",
+  "primaryApiKey": "dummy",
+  "firstStartTime": "2026-03-03T05:04:07.169Z",
+  "opusProMigrationComplete": true,
+  "sonnet1m45MigrationComplete": true,
+  "cachedChromeExtensionInstalled": false,
+  "clientDataCache": {
+    "data": null,
+    "timestamp": 1772519513983
+  },
+  "userID": "9724ea8aded82a62f3c5b00dbe39ede43f56998a2522863ad03db5b68c1b81af",
+  "projects": {
+  },
+  "lastReleaseNotesSeen": "2.1.71",
+  "ideHintShownCount": 5,
+  "officialMarketplaceAutoInstallAttempted": true,
+  "officialMarketplaceAutoInstalled": true,
+  "changelogLastFetched": 1773062731064,
+  "autoUpdatesProtectedForNative": true,
+  "skillUsage": {
+    "init": {
+      "usageCount": 2,
+      "lastUsedAt": 1773069590693
+    },
+    "superpowers:brainstorming": {
+      "usageCount": 2,
+      "lastUsedAt": 1773105542155
+    },
+    "superpowers:writing-plans": {
+      "usageCount": 2,
+      "lastUsedAt": 1773108405030
+    },
+    "superpowers:subagent-driven-development": {
+      "usageCount": 1,
+      "lastUsedAt": 1773064817320
+    },
+    "superpowers:systematic-debugging": {
+      "usageCount": 4,
+      "lastUsedAt": 1773157711068
+    }
+  },
+  "toolUsage": {
+    "Glob": {
+      "usageCount": 1,
+      "lastUsedAt": 1772544669731
+    }
+  },
+  "showSpinnerTree": false,
+  "feedbackSurveyState": {
+    "lastShownTime": 1773048148784
+  },
+  "lastPlanModeUse": 1773038136593,
+  "effortCalloutV2Dismissed": true,
+  "metricsStatusCache": {
+    "enabled": false,
+    "vcsAccountLinkingEnabled": false,
+    "timestamp": 1773198147658
+  },
+  "lspRecommendationIgnoredCount": 1
+}

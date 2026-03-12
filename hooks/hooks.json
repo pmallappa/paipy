@@ -1,0 +1,113 @@
+{
+  "$comment": "PAI hook registrations — plugin format. Uses ${CLAUDE_PLUGIN_ROOT} for portability.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "PYTHONPATH=${CLAUDE_PLUGIN_ROOT}:${CLAUDE_PLUGIN_ROOT}/hooks/py python3 ${CLAUDE_PLUGIN_ROOT}/hooks/py/load_context.py"
+          },
+          {
+            "type": "command",
+            "command": "PYTHONPATH=${CLAUDE_PLUGIN_ROOT}:${CLAUDE_PLUGIN_ROOT}/hooks/py python3 ${CLAUDE_PLUGIN_ROOT}/hooks/py/stubs.py"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "PYTHONPATH=${CLAUDE_PLUGIN_ROOT}:${CLAUDE_PLUGIN_ROOT}/hooks/py python3 ${CLAUDE_PLUGIN_ROOT}/hooks/py/rating_capture.py"
+          },
+          {
+            "type": "command",
+            "command": "PYTHONPATH=${CLAUDE_PLUGIN_ROOT}:${CLAUDE_PLUGIN_ROOT}/hooks/py python3 ${CLAUDE_PLUGIN_ROOT}/hooks/py/session_auto_name.py"
+          },
+          {
+            "type": "command",
+            "command": "PYTHONPATH=${CLAUDE_PLUGIN_ROOT}:${CLAUDE_PLUGIN_ROOT}/hooks/py python3 ${CLAUDE_PLUGIN_ROOT}/hooks/py/stubs.py"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [{"type": "command", "command": "PYTHONPATH=${CLAUDE_PLUGIN_ROOT}:${CLAUDE_PLUGIN_ROOT}/hooks/py python3 ${CLAUDE_PLUGIN_ROOT}/hooks/py/security_validator.py"}]
+      },
+      {
+        "matcher": "Edit",
+        "hooks": [{"type": "command", "command": "PYTHONPATH=${CLAUDE_PLUGIN_ROOT}:${CLAUDE_PLUGIN_ROOT}/hooks/py python3 ${CLAUDE_PLUGIN_ROOT}/hooks/py/security_validator.py"}]
+      },
+      {
+        "matcher": "Write",
+        "hooks": [{"type": "command", "command": "PYTHONPATH=${CLAUDE_PLUGIN_ROOT}:${CLAUDE_PLUGIN_ROOT}/hooks/py python3 ${CLAUDE_PLUGIN_ROOT}/hooks/py/security_validator.py"}]
+      },
+      {
+        "matcher": "Read",
+        "hooks": [{"type": "command", "command": "PYTHONPATH=${CLAUDE_PLUGIN_ROOT}:${CLAUDE_PLUGIN_ROOT}/hooks/py python3 ${CLAUDE_PLUGIN_ROOT}/hooks/py/security_validator.py"}]
+      },
+      {
+        "matcher": "Task",
+        "hooks": [{"type": "command", "command": "PYTHONPATH=${CLAUDE_PLUGIN_ROOT}:${CLAUDE_PLUGIN_ROOT}/hooks/py python3 ${CLAUDE_PLUGIN_ROOT}/hooks/py/agent_execution_guard.py"}]
+      },
+      {
+        "matcher": "Skill",
+        "hooks": [{"type": "command", "command": "PYTHONPATH=${CLAUDE_PLUGIN_ROOT}:${CLAUDE_PLUGIN_ROOT}/hooks/py python3 ${CLAUDE_PLUGIN_ROOT}/hooks/py/skill_guard.py"}]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write",
+        "hooks": [{"type": "command", "command": "PYTHONPATH=${CLAUDE_PLUGIN_ROOT}:${CLAUDE_PLUGIN_ROOT}/hooks/py python3 ${CLAUDE_PLUGIN_ROOT}/hooks/py/prd_sync.py"}]
+      },
+      {
+        "matcher": "Edit",
+        "hooks": [{"type": "command", "command": "PYTHONPATH=${CLAUDE_PLUGIN_ROOT}:${CLAUDE_PLUGIN_ROOT}/hooks/py python3 ${CLAUDE_PLUGIN_ROOT}/hooks/py/prd_sync.py"}]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "PYTHONPATH=${CLAUDE_PLUGIN_ROOT}:${CLAUDE_PLUGIN_ROOT}/hooks/py python3 ${CLAUDE_PLUGIN_ROOT}/hooks/py/last_response_cache.py"
+          },
+          {
+            "type": "command",
+            "command": "PYTHONPATH=${CLAUDE_PLUGIN_ROOT}:${CLAUDE_PLUGIN_ROOT}/hooks/py python3 ${CLAUDE_PLUGIN_ROOT}/hooks/py/stubs.py"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "PYTHONPATH=${CLAUDE_PLUGIN_ROOT}:${CLAUDE_PLUGIN_ROOT}/hooks/py python3 ${CLAUDE_PLUGIN_ROOT}/hooks/py/work_completion_learning.py"
+          },
+          {
+            "type": "command",
+            "command": "PYTHONPATH=${CLAUDE_PLUGIN_ROOT}:${CLAUDE_PLUGIN_ROOT}/hooks/py python3 ${CLAUDE_PLUGIN_ROOT}/hooks/py/session_cleanup.py"
+          },
+          {
+            "type": "command",
+            "command": "PYTHONPATH=${CLAUDE_PLUGIN_ROOT}:${CLAUDE_PLUGIN_ROOT}/hooks/py python3 ${CLAUDE_PLUGIN_ROOT}/hooks/py/relationship_memory.py"
+          },
+          {
+            "type": "command",
+            "command": "PYTHONPATH=${CLAUDE_PLUGIN_ROOT}:${CLAUDE_PLUGIN_ROOT}/hooks/py python3 ${CLAUDE_PLUGIN_ROOT}/hooks/py/update_counts.py"
+          },
+          {
+            "type": "command",
+            "command": "PYTHONPATH=${CLAUDE_PLUGIN_ROOT}:${CLAUDE_PLUGIN_ROOT}/hooks/py python3 ${CLAUDE_PLUGIN_ROOT}/hooks/py/stubs.py"
+          }
+        ]
+      }
+    ]
+  }
+}

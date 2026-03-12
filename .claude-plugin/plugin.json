@@ -1,0 +1,9 @@
+{
+  "name": "paipy",
+  "version": "1.0.0",
+  "description": "Personal AI hook infrastructure for Claude Code",
+  "author": {
+    "name": "PAI"
+  },
+  "hooks": "./hooks/hooks.json"
+}

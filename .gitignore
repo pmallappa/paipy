@@ -1,0 +1,6 @@
+settings.local.json
+__pycache__
+**/*.pyc
+
+**/*.bak
+**/*.orig

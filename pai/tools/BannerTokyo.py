@@ -1,0 +1,92 @@
+#!/usr/bin/env python3
+"""
+Banner - Tokyo Night Theme
+Deep blue-black with soft neon accents
+"""
+
+import random
+import sys
+from datetime import datetime
+
+RESET = "\x1b[0m"
+BOLD = "\x1b[1m"
+DIM = "\x1b[2m"
+
+BG_DARK = "\x1b[38;2;26;27;38m"
+FG = "\x1b[38;2;169;177;214m"
+CYAN = "\x1b[38;2;125;207;255m"
+BLUE = "\x1b[38;2;122;162;247m"
+MAGENTA = "\x1b[38;2;187;154;247m"
+PURPLE = "\x1b[38;2;157;124;216m"
+GREEN = "\x1b[38;2;158;206;106m"
+ORANGE = "\x1b[38;2;255;158;100m"
+RED = "\x1b[38;2;247;118;142m"
+COMMENT = "\x1b[38;2;86;95;137m"
+DARK = "\x1b[38;2;52;59;88m"
+
+
+def design_a() -> str:
+    return f"""
+{COMMENT}\u250c{'─'*66}
+{COMMENT}\u2502{RESET}
+{COMMENT}\u2502{RESET}  {DIM}{FG}welcome to your{RESET}
+{COMMENT}\u2502{RESET}
+{COMMENT}\u2502{RESET}  {BOLD}{BLUE}\u2588\u2588\u2557  \u2588\u2588\u2557{MAGENTA} \u2588\u2588\u2588\u2588\u2588\u2557 {CYAN}\u2588\u2588\u2557{RESET}
+{COMMENT}\u2502{RESET}  {BOLD}{BLUE}\u2588\u2588\u2551 \u2588\u2588\u2554\u255d{MAGENTA}\u2588\u2588\u2554\u2550\u2550\u2588\u2588\u2557{CYAN}\u2588\u2588\u2551{RESET}
+{COMMENT}\u2502{RESET}  {BOLD}{BLUE}\u2588\u2588\u2588\u2588\u2588\u2554\u255d {MAGENTA}\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2551{CYAN}\u2588\u2588\u2551{RESET}      {DARK}\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591{RESET}
+{COMMENT}\u2502{RESET}  {BOLD}{BLUE}\u2588\u2588\u2554\u2550\u2588\u2588\u2557 {MAGENTA}\u2588\u2588\u2554\u2550\u2550\u2588\u2588\u2551{CYAN}\u2588\u2588\u2551{RESET}      {COMMENT}personal ai system{RESET}
+{COMMENT}\u2502{RESET}  {BOLD}{BLUE}\u2588\u2588\u2551  \u2588\u2588\u2557{MAGENTA}\u2588\u2588\u2551  \u2588\u2588\u2551{CYAN}\u2588\u2588\u2551{RESET}      {DARK}\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591{RESET}
+{COMMENT}\u2502{RESET}
+{COMMENT}\u2502{RESET}  {GREEN}\u2713{RESET} {DIM}{FG}core loaded{RESET}
+{COMMENT}\u2502{RESET}
+{COMMENT}\u2514{'─'*66}
+"""
+
+
+def design_b() -> str:
+    return f"""
+{DARK}\u2580{'─'*61}{RESET}
+{MAGENTA}\u2591{RESET} {BOLD}{FG}WELCOME TO YOUR PAI SYSTEM{RESET}
+{DARK}\u2584{'─'*61}{RESET}
+
+  {BOLD}{MAGENTA}    \u2588\u2588\u2557  \u2588\u2588\u2557{RESET}{BOLD}{BLUE} \u2588\u2588\u2588\u2588\u2588\u2557 {RESET}{BOLD}{CYAN}\u2588\u2588\u2557{RESET}
+  {BOLD}{MAGENTA}    \u2588\u2588\u2551 \u2588\u2588\u2554\u255d{RESET}{BOLD}{BLUE}\u2588\u2588\u2554\u2550\u2550\u2588\u2588\u2557{RESET}{BOLD}{CYAN}\u2588\u2588\u2551{RESET}
+  {BOLD}{MAGENTA}    \u2588\u2588\u2588\u2588\u2588\u2554\u255d {RESET}{BOLD}{BLUE}\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2551{RESET}{BOLD}{CYAN}\u2588\u2588\u2551{RESET}
+
+{DARK}{'─'*63}{RESET}
+  {GREEN}\u2713{RESET} {COMMENT}core{RESET}    {GREEN}\u2713{RESET} {COMMENT}skills{RESET}    {GREEN}\u2713{RESET} {COMMENT}hooks{RESET}    {GREEN}\u2713{RESET} {COMMENT}memory{RESET}
+"""
+
+
+def design_f() -> str:
+    h = lambda: f"{random.randint(0,255):02x}"
+    return f"""
+{BLUE}\u256d{'─'*66}
+{BLUE}\u2502{RESET}
+{BLUE}\u2502{RESET}  {DARK}0x{h()}{h()}{RESET}  {BOLD}{MAGENTA}K{BLUE}A{CYAN}I{RESET}  {DARK}:: {COMMENT}personal ai system{RESET}
+{BLUE}\u2502{RESET}
+{BLUE}\u2502{RESET}  {COMMENT}welcome to your pai system{RESET}
+{BLUE}\u2502{RESET}
+{BLUE}\u2502{RESET}  {GREEN}\u25aa{RESET} {FG}core{RESET}     {DARK}{'─'*8}{RESET} {GREEN}online{RESET}
+{BLUE}\u2502{RESET}  {GREEN}\u25aa{RESET} {FG}skills{RESET}   {DARK}{'─'*8}{RESET} {GREEN}63 loaded{RESET}
+{BLUE}\u2502{RESET}  {GREEN}\u25aa{RESET} {FG}memory{RESET}   {DARK}{'─'*8}{RESET} {GREEN}active{RESET}
+{BLUE}\u2502{RESET}
+{BLUE}\u2570{'─'*66}
+"""
+
+
+def main() -> None:
+    designs = [
+        ("DESIGN A: TOKYO DRIFT", design_a),
+        ("DESIGN B: NEON TOKYO", design_b),
+        ("DESIGN F: TOKYO TERMINAL", design_f),
+    ]
+    for title, fn in designs:
+        print(f"\n{'='*70}")
+        print(f" {title}")
+        print(f"{'='*70}")
+        print(fn())
+
+
+if __name__ == "__main__":
+    main()

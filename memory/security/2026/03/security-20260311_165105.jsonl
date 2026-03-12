@@ -1,0 +1,1 @@
+{"timestamp": "2026-03-11T16:51:05Z", "tool": "Bash", "detail": "echo '{\"tool_name\":\"Bash\",\"tool_input\":{\"command\":\"rm -rf /\"}}' | python3 /home/pmallapp/tmp/sandbox-test/.claude/hooks/py/security_validator.py; echo \"exit: $?\"", "decision": "block"}

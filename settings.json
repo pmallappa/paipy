@@ -1,0 +1,214 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "env": {
+    "PAI_DIR": "/home/pmallapp/tmp/sandbox-test/.claude",
+    "PYTHONPATH": "/home/pmallapp/tmp/sandbox-test/.claude:/home/pmallapp/tmp/sandbox-test/.claude/hooks/py",
+    "CLAUDE_CODE_MAX_OUTPUT_TOKENS": "80000",
+    "BASH_DEFAULT_TIMEOUT_MS": "600000",
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
+  "permissions": {
+    "allow": [
+      "Bash",
+      "Read",
+      "Write",
+      "Edit",
+      "MultiEdit",
+      "Glob",
+      "Grep",
+      "LS",
+      "WebFetch",
+      "WebSearch",
+      "NotebookRead",
+      "NotebookEdit",
+      "TodoWrite",
+      "ExitPlanMode",
+      "Task",
+      "Skill",
+      "mcp__*"
+    ],
+    "deny": [],
+    "ask": [
+      "Bash(rm -rf /)",
+      "Bash(rm -rf /:*)",
+      "Bash(sudo rm -rf /)",
+      "Bash(rm -rf ~)",
+      "Bash(rm -rf ~/.claude)",
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
+      "Read(~/.ssh/id_*)",
+      "Read(~/.aws/credentials)",
+      "Write(~/.claude/settings.json)",
+      "Edit(~/.claude/settings.json)"
+    ],
+    "defaultMode": "default"
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [],
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${PAI_DIR}/hooks/py/load_context.py"
+          },
+          {
+            "type": "command",
+            "command": "${PAI_DIR}/hooks/py/stubs.py"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${PAI_DIR}/hooks/py/rating_capture.py"
+          },
+          {
+            "type": "command",
+            "command": "${PAI_DIR}/hooks/py/session_auto_name.py"
+          },
+          {
+            "type": "command",
+            "command": "${PAI_DIR}/hooks/py/stubs.py"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${PAI_DIR}/hooks/py/security_validator.py"
+          }
+        ]
+      },
+      {
+        "matcher": "Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${PAI_DIR}/hooks/py/security_validator.py"
+          }
+        ]
+      },
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${PAI_DIR}/hooks/py/security_validator.py"
+          }
+        ]
+      },
+      {
+        "matcher": "Read",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${PAI_DIR}/hooks/py/security_validator.py"
+          }
+        ]
+      },
+      {
+        "matcher": "Task",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${PAI_DIR}/hooks/py/agent_execution_guard.py"
+          }
+        ]
+      },
+      {
+        "matcher": "Skill",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${PAI_DIR}/hooks/py/skill_guard.py"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${PAI_DIR}/hooks/py/prd_sync.py"
+          }
+        ]
+      },
+      {
+        "matcher": "Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${PAI_DIR}/hooks/py/prd_sync.py"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${PAI_DIR}/hooks/py/last_response_cache.py"
+          },
+          {
+            "type": "command",
+            "command": "${PAI_DIR}/hooks/py/stubs.py"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${PAI_DIR}/hooks/py/work_completion_learning.py"
+          },
+          {
+            "type": "command",
+            "command": "${PAI_DIR}/hooks/py/session_cleanup.py"
+          },
+          {
+            "type": "command",
+            "command": "${PAI_DIR}/hooks/py/relationship_memory.py"
+          },
+          {
+            "type": "command",
+            "command": "${PAI_DIR}/hooks/py/update_counts.py"
+          },
+          {
+            "type": "command",
+            "command": "${PAI_DIR}/hooks/py/stubs.py"
+          }
+        ]
+      }
+    ]
+  },
+  "mcpServers": {
+    "cloudflare": {
+      "url": "https://mcp.cloudflare.com/mcp"
+    }
+  },
+  "max_tokens": 16000,
+  "feedbackSurveyState": {
+    "lastShownTime": 1735430400000
+  },
+  "counts": {
+    "skills": 650,
+    "hooks": 56,
+    "workflows": 650,
+    "signals": 1,
+    "updatedAt": "2026-03-11T19:52:13Z"
+  }
+}
