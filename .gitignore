@@ -1,9 +1,57 @@
+# ── Local / machine-specific overrides ───────────────────────────────────────
 settings.local.json
 settings.template.json
-__pycache__
-**/*.pyc
+.env
+.env.*
 
+# ── Runtime state & session data ─────────────────────────────────────────────
+history.jsonl
+projects/
+shell-snapshots/
+file-history/
+session-env/
+backups/
+
+# ── Memory (auto-generated, large, personal) ──────────────────────────────────
+memory/RAW/
+memory/WORK/
+memory/STATE/
+memory/RESEARCH/
+memory/SECURITY/
+memory/LEARNING/SIGNALS/
+
+# ── Secrets & credentials ─────────────────────────────────────────────────────
+*.pem
+*.key
+*.cert
+*.p12
+*.pfx
+secrets/
+.secrets
+
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+**/*.pyc
+**/*.pyo
+*.egg-info/
+.venv/
+venv/
+
+# ── Node / Bun ────────────────────────────────────────────────────────────────
+node_modules/
+.npm/
+*.tsbuildinfo
+
+# ── OS & editor noise ─────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# ── Temp / backup artifacts ───────────────────────────────────────────────────
 **/*.bak
 **/*.orig
-**/backups
-**/projects
+**/*.tmp
+*.log
