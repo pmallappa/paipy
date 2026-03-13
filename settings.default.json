@@ -11,6 +11,8 @@
 
   "permissions": {
     "allow": [
+      "Bash(bash*notify.sh*)",
+      "Bash(bash*banner-server/notify.sh*)",
       "Bash",
       "Read",
       "Write",
@@ -74,86 +76,13 @@
       "Write(~/.claude/settings.json)",
       "Edit(~/.claude/settings.json)"
     ],
-    "defaultMode": "default"
+    "defaultMode": "plan"
   },
 
   "enableAllProjectMcpServers": true,
   "enabledMcpjsonServers": [],
 
-  "hooks": {
-    "SessionStart": [
-      {
-        "hooks": [
-          { "type": "command", "command": "${PAI_DIR}/hooks/py/load_context.py" },
-          { "type": "command", "command": "${PAI_DIR}/hooks/py/stubs.py" }
-        ]
-      }
-    ],
-    "UserPromptSubmit": [
-      {
-        "hooks": [
-          { "type": "command", "command": "${PAI_DIR}/hooks/py/rating_capture.py" },
-          { "type": "command", "command": "${PAI_DIR}/hooks/py/session_auto_name.py" },
-          { "type": "command", "command": "${PAI_DIR}/hooks/py/stubs.py" }
-        ]
-      }
-    ],
-    "PreToolUse": [
-      {
-        "matcher": "Bash",
-        "hooks": [{ "type": "command", "command": "${PAI_DIR}/hooks/py/security_validator.py" }]
-      },
-      {
-        "matcher": "Edit",
-        "hooks": [{ "type": "command", "command": "${PAI_DIR}/hooks/py/security_validator.py" }]
-      },
-      {
-        "matcher": "Write",
-        "hooks": [{ "type": "command", "command": "${PAI_DIR}/hooks/py/security_validator.py" }]
-      },
-      {
-        "matcher": "Read",
-        "hooks": [{ "type": "command", "command": "${PAI_DIR}/hooks/py/security_validator.py" }]
-      },
-      {
-        "matcher": "Task",
-        "hooks": [{ "type": "command", "command": "${PAI_DIR}/hooks/py/agent_execution_guard.py" }]
-      },
-      {
-        "matcher": "Skill",
-        "hooks": [{ "type": "command", "command": "${PAI_DIR}/hooks/py/skill_guard.py" }]
-      }
-    ],
-    "PostToolUse": [
-      {
-        "matcher": "Write",
-        "hooks": [{ "type": "command", "command": "${PAI_DIR}/hooks/py/prd_sync.py" }]
-      },
-      {
-        "matcher": "Edit",
-        "hooks": [{ "type": "command", "command": "${PAI_DIR}/hooks/py/prd_sync.py" }]
-      }
-    ],
-    "Stop": [
-      {
-        "hooks": [
-          { "type": "command", "command": "${PAI_DIR}/hooks/py/last_response_cache.py" },
-          { "type": "command", "command": "${PAI_DIR}/hooks/py/stubs.py" }
-        ]
-      }
-    ],
-    "SessionEnd": [
-      {
-        "hooks": [
-          { "type": "command", "command": "${PAI_DIR}/hooks/py/work_completion_learning.py" },
-          { "type": "command", "command": "${PAI_DIR}/hooks/py/session_cleanup.py" },
-          { "type": "command", "command": "${PAI_DIR}/hooks/py/relationship_memory.py" },
-          { "type": "command", "command": "${PAI_DIR}/hooks/py/update_counts.py" },
-          { "type": "command", "command": "${PAI_DIR}/hooks/py/stubs.py" }
-        ]
-      }
-    ]
-  },
+  "$comment_hooks": "Hooks are now owned by the PAI plugin at .claude-plugin/plugin.json → hooks/hooks.json. Do not add hooks here to avoid double-firing.",
 
   "mcpServers": {
     "cloudflare": {

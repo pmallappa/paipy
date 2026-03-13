@@ -19,8 +19,6 @@ Your first output MUST be the mode header. No freeform output. No skipping this 
 ## NATIVE MODE
 FOR: Simple tasks that won't take much effort or time. More advanced tasks use ALGORITHM MODE below.
 
-**Notify:** `$HOME/.claude/banner-server/notify.sh '{"message": "Executing using PAI native mode", "type": "native"}'`
-
 ```
 ════ PAI | NATIVE MODE ═══════════════════════
 ✎ TASK: [8 word description]

@@ -11,6 +11,10 @@
           {
             "type": "command",
             "command": "PYTHONPATH=${CLAUDE_PLUGIN_ROOT}:${CLAUDE_PLUGIN_ROOT}/hooks/py python3 ${CLAUDE_PLUGIN_ROOT}/hooks/py/stubs.py"
+          },
+          {
+            "type": "command",
+            "command": "bash ${CLAUDE_PLUGIN_ROOT}/banner-server/notify.sh '{\"message\": \"PAI session started\", \"type\": \"entry\"}' > /dev/null 2>&1 || true"
           }
         ]
       }
@@ -18,6 +22,10 @@
     "UserPromptSubmit": [
       {
         "hooks": [
+          {
+            "type": "command",
+            "command": "bash ${CLAUDE_PLUGIN_ROOT}/banner-server/notify.sh '{\"message\": \"Processing...\", \"type\": \"native\"}' > /dev/null 2>&1 || true"
+          },
           {
             "type": "command",
             "command": "PYTHONPATH=${CLAUDE_PLUGIN_ROOT}:${CLAUDE_PLUGIN_ROOT}/hooks/py python3 ${CLAUDE_PLUGIN_ROOT}/hooks/py/rating_capture.py"

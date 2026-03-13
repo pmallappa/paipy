@@ -1,6 +1,10 @@
 {
   "extends": "./settings.user.json",
-  "permissions": {
-    "defaultMode": "plan"
+  "model": "opus[1m]",
+
+  "statusLine": {
+    "type": "command",
+    "command": "scripts/statusline.sh"
   }
+
 }
