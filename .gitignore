@@ -56,3 +56,6 @@ Thumbs.db
 **/*.orig
 **/*.tmp
 *.log
+**/memory
+**/plans
+**/tasks
