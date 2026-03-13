@@ -1,9 +1,14 @@
 {
-  "name": "paipy",
-  "version": "1.0.0",
-  "description": "Personal AI hook infrastructure for Claude Code",
+  "name": "pai",
+  "version": "4.0.0",
+  "description": "PAI — Personal AI Infrastructure. Pro-level hooks, skills, memory, security, and voice for Claude Code.",
   "author": {
-    "name": "PAI"
+    "name": "pmallapp"
   },
-  "hooks": "./hooks/hooks.json"
+  "homepage": "https://github.com/pmallapp/pai",
+  "license": "MIT",
+  "hooks": "./hooks/hooks.json",
+  "skills": "./skills",
+  "agents": "./agents",
+  "settings": "./settings.default.json"
 }
