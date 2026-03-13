@@ -1,10 +1,8 @@
 {
-  "extends": "./settings.user.json",
-  "model": "opus[1m]",
-
+  "model": "sonnet[1m]",
   "statusLine": {
     "type": "command",
-    "command": "scripts/statusline.sh"
-  }
-
+    "command": "~/.claude/scripts/statusline.sh"
+  },
+  "extends": "~/.claude/settings.user.json"
 }

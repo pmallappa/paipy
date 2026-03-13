@@ -15,6 +15,8 @@
       "Bash(bash*banner-server/notify.sh*)",
       "Bash",
       "Read",
+      "Read(/home/pmallapp/.claude/**)",
+      "Read(/home/pmallapp/.config/claude/**)",
       "Write",
       "Edit",
       "MultiEdit",
